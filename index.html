@@ -5,19 +5,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./src/css/styles.css" />
 
-    <title>Ingredient based suggestions</title>
+    <title>Cook Smarter</title>
   </head>
   <body>
-      <div class="main--container">
-        <div class="search--container"> 
-          <header class="header--container">
-            <h1 id="header--h1">Recipes from What You Have</h1>
-          </header>
-          <div class="input--container">
-            <input type="text" id="search--input" placeholder="Tomato,Rice,Egg ..." autocomplete="off" >
-          </div>
+    <div class="main--container">
+      <div class="search--container">
+        <header class="header--container">
+          <h1 class="header--h1">Recipes from What You Have</h1>
+        </header>
+        <div class="input--container">
+          <input
+            type="text"
+            id="search--input"
+            placeholder="Tomato,Rice,Egg ..."
+            autocomplete="off"
+          />
         </div>
-      <div>
+      </div>
+    </div>
+
+    <div id="results--container">
+      <!-- <header id="results--headerContainer">
+        <h1 id="results--h1">Suggested Recipes</h1>
+      </header> -->
+      <div id="recommended--container">
+        <div id="recommended--recipes">
+          <ul class="recipe--list">
+            <li class="recipe--item">
+              <div class="recipe--imgContainer">
+                <h1 class="recipe--title">Pizza</h1>
+                <img src="./src/img/pizza.jpg" alt="" class="recipe--img" />
+              </div>
+              <div>
+                <p class="recipe--description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Labore, pariatur?
+                </p>
+              </div>
+            </li>
+            <li class="recipe--item">
+              <div class="recipe--imgContainer">
+                <h1 class="recipe--title">Pizza</h1>
+                <img src="./src/img/pizza.jpg" alt="" class="recipe--img" />
+              </div>
+              <div>
+                <p class="recipe--description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Labore, pariatur?
+                </p>
+              </div>
+            </li>
+            <li class="recipe--item">
+              <div class="recipe--imgContainer">
+                <h1 class="recipe--title">Pizza</h1>
+                <img src="./src/img/pizza.jpg" alt="" class="recipe--img" />
+              </div>
+              <div>
+                <p class="recipe--description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Labore, pariatur?
+                </p>
+              </div>
+            </li>
+            <li class="recipe--item">
+              <div class="recipe--imgContainer">
+                <h1 class="recipe--title">Pizza</h1>
+                <img src="./src/img/pizza.jpg" alt="" class="recipe--img" />
+              </div>
+              <div>
+                <p class="recipe--description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Labore, pariatur?
+                </p>
+              </div>
+            </li>
+            <li class="recipe--item">
+              <div class="recipe--imgContainer">
+                <h1 class="recipe--title">Pizza</h1>
+                <img src="./src/img/pizza.jpg" alt="" class="recipe--img" />
+              </div>
+              <div>
+                <p class="recipe--description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Labore, pariatur?
+                </p>
+              </div>
+            </li>
+            <li class="recipe--item">
+              <div class="recipe--imgContainer">
+                <h1 class="recipe--title">Pizza</h1>
+                <img src="./src/img/pizza.jpg" alt="" class="recipe--img" />
+              </div>
+              <div>
+                <p class="recipe--description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Labore, pariatur?
+                </p>
+              </div>
+            </li>
+            <li class="recipe--item">
+              <div class="recipe--imgContainer">
+                <h1 class="recipe--title">Pizza</h1>
+                <img src="./src/img/pizza.jpg" alt="" class="recipe--img" />
+              </div>
+              <div>
+                <p class="recipe--description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Labore, pariatur?
+                </p>
+              </div>
+            </li>
+            <li class="recipe--item">
+              <div class="recipe--imgContainer">
+                <h1 class="recipe--title">Pizza</h1>
+                <img src="./src/img/pizza.jpg" alt="" class="recipe--img" />
+              </div>
+              <div>
+                <p class="recipe--description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Labore, pariatur?
+                </p>
+              </div>
+            </li>
+            <li class="recipe--item">
+              <div class="recipe--imgContainer">
+                <h1 class="recipe--title">Pizza</h1>
+                <img src="./src/img/pizza.jpg" alt="" class="recipe--img" />
+              </div>
+              <div>
+                <p class="recipe--description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Labore, pariatur?
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div id="description--container">
+          <h1 class="description--title">Step by step</h1>
+          <ul class="description--text">
+            <li>Preheat oven to 400°F</li>
+            <li>Preheat oven to 400°F</li>
+            <li>Preheat oven to 400°F</li>
+            <li>Preheat oven to 400°F</li>
+            <li>Preheat oven to 400°F</li>
+            <li>Preheat oven to 400°F</li>
+          </ul>
+          <h1 class="description--title">What you need</h1>
+          <ul class="description--list">
+            <li>1 tspn salt</li>
+            <li>1 tspn pepper</li>
+            <li>1 tspn garlic</li>
+            <li>1 tspn onion</li>
+            <li>1 tspn olive oil</li>
+            <li>1 tspn tomato paste</li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <script type="module" src="./src/js/controller.js"></script>
   </body>

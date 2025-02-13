@@ -9,7 +9,14 @@
 export default class View {
   _data;
 
-  render(data) {}
+  render(data) {
+    if (!data || data.length === 0) return this.renderError();
+
+    this._data = data;
+    const markup = this._generateMarkup();
+    this._clear();
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
 
   _clear() {
     if (this._parentElement.tagName === "INPUT") {

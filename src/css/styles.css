@@ -30,7 +30,9 @@ body::before {
 }
 
 .main--container {
-  display: flex;
+  display: none;
+
+  /* display: flex; */
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -69,14 +71,14 @@ body::before {
   justify-content: end;
   width: 95%;
   height: 50%;
-  /* border: 1px solid black; */
+  border: 1px solid black;
   /* border-radius: 10px; */
   /* background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
   z-index: 1;
 }
 
-#header--h1 {
+.header--h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -110,4 +112,158 @@ body::before {
   border-radius: 2rem;
   background-color: rgba(255, 255, 255, 0.8);
   outline: none; /* Removes the default focus outline */
+}
+
+#results--container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 75%;
+  height: 70%;
+  background-color: rgba(170, 180, 187, 0.8);
+  border-radius: 2rem;
+  border: #ffffff 3px solid;
+}
+
+#results--headerContainer {
+  /* border: #6e7e57 2px solid; */
+}
+
+#results--h1 {
+  text-align: center;
+  width: 47.5%;
+  margin: 2%;
+  margin-left: 1%;
+  /* border: #6e7e57 2px solid; */
+}
+
+#recommended--container {
+  display: flex;
+  width: 95%;
+  height: 85%;
+  margin-left: 2%;
+  margin-right: 2%;
+  gap: 3rem;
+  /* border: #e2150e 2px solid; */
+}
+
+#recommended--recipes {
+  width: 40%;
+  margin-left: 3%;
+  background: #f0ebeb;
+  border-radius: 2rem;
+  /* border: rgb(10, 255, 10) 2px solid; */
+}
+
+ul {
+  list-style-type: none;
+}
+
+.recipe--list {
+  width: 99%;
+  margin-top: 3px;
+  overflow-y: auto;
+  max-height: 100%;
+  padding-right: 3px;
+  position: relative;
+  direction: ltr; /* Keeps content left-to-right */
+  border: #f0ebeb 1rem solid;
+  border-radius: 2rem;
+}
+
+/* Move scrollbar to the left side */
+.recipe--list::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Adjust scrollbar track to align with the left */
+.recipe--list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Move scrollbar thumb (draggable part) */
+.recipe--list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Flip scrollbar without flipping content */
+.recipe--list {
+  transform: scaleX(-1); /* Flips only the scrollbar */
+}
+
+.recipe--list * {
+  transform: scaleX(-1); /* Reverses content back to normal */
+}
+
+.recipe--item {
+  margin-bottom: 2%;
+  background-color: #47695f;
+  border-radius: 0.3rem;
+  /* border: #fbff0786 solid 2px; */
+}
+
+.recipe--imgContainer {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+
+  /* border: #00000086 solid 2px; */
+}
+
+.recipe--img {
+  display: flex;
+  width: 25%;
+
+  /* border: #6051b886 solid 2px; */
+}
+
+.recipe--title {
+  display: flex;
+  width: 75%;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: #f0ebeb;
+  /* border: #00000086 solid 2px; */
+}
+
+.recipe--description {
+  text-align: left;
+  margin-right: 1%;
+  margin-top: 0.3%;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #f0ebeb;
+
+  /* border: #c739a886 solid 2px; */
+}
+
+#description--container {
+  width: 50%;
+  /* border: #00000086 solid 2px; */
+  background: #f0ebeb;
+  border-radius: 2rem;
+}
+
+.description--title {
+  margin-top: 2%;
+  margin-bottom: 4%;
+}
+
+.description--text {
+  text-align: left;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  /* border: #ffffff86 solid 3px;
+  margin-bottom: 2rem;*/
+}
+
+.description--list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Creates 2 columns */
+  gap: 10px; /* Space between items */
+  /* border: #00000086 solid 2px; */
 }
