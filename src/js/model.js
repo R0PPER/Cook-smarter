@@ -1,29 +1,55 @@
 import { async } from "regenerator-runtime";
 import { API_URL, API_KEY } from "./config.js";
+import { getJSON } from "./helpers.js";
 
-export const state = {};
+export const state = {
+  recipe: {},
+};
 
 export const loadSearch = async function (query) {
   try {
-    const res = await fetch(`${API_URL}?${API_KEY}&ingredients=${query}`);
-    const data = await res.json();
-    console.log(data);
-
-    if (!res.ok) throw new Error(`Something went wrong! (${res.status})`);
-
-    const recipeId = data[0].id;
-    const recipeResponse = await fetch(
-      `https://api.spoonacular.com/recipes/${recipeId}/information?${API_KEY}&includeNutrition=false`
+    const searchData = await getJSON(
+      `${API_URL}?${API_KEY}&ingredients=${query}`
     );
 
-    if (!recipeResponse.ok) {
-      throw new Error(`Something went wrong! ${recipeResponse.status}`);
-    }
+    console.log(searchData);
 
-    const recipeData = await recipeResponse.json();
-    console.log(recipeData);
+    if (!searchData.length) throw new Error("No recipes found!");
 
-    // console.log(query);
+    state.recipe = searchData;
+
+    console.log(state.recipe);
+
+    // const recipeId = searchData[0].id;
+    // loadRecipe(recipeId);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const loadRecipe = async function (id) {
+  try {
+    const recipeData = await getJSON(
+      `https://api.spoonacular.com/recipes/${id}/information?${API_KEY}&includeNutrition=false`
+    );
+
+    state.recipe = {
+      title: recipeData.title,
+      image: recipeData.image,
+      ingredients: recipeData.extendedIngredients.map((ing) => ({
+        name: ing.name,
+        amount: ing.measures.metric.amount,
+        metric: ing.measures.metric.unitShort
+          ? ing.measures.metric.unitShort
+          : "unit",
+      })),
+      steps: recipeData.analyzedInstructions.length
+        ? recipeData.analyzedInstructions[0].steps.map((step) => step.step)
+        : ["No steps provided."],
+      summary: recipeData.summary.replace(/<\/?[^>]+(>|$)/g, ""), // Remove HTML tags
+    };
+
+    console.log(state.recipe);
   } catch (err) {
     console.log(err);
   }

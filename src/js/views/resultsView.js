@@ -1,19 +1,38 @@
 import View from "./view.js";
 
 class ResultsView extends View {
-  _parentElement = document.getElementById("results--container");
+  _parentElement = document.querySelector(".recipe--list");
   _errorMessage = "No recipes found for this ingredients. Please try again!";
+  _btnBack = document.getElementById("btn--back");
 
   _generateMarkup() {
-    return `
-      <div class="results">
-        <h2>Results</h2>
-        <ul class="results__list">
-        
-        </ul>
-      </div>
-    `;
+    return this._data
+      .map((data) => {
+        return `
+          <li class="recipe--item" id="${data.id}">
+            <div class="recipe--imgContainer">
+              <img src="${data.image}" alt="${data.title}" class="recipe--img" />
+              <h1 class="recipe--title">${data.title}</h1>
+            </div>
+          </li>
+        `;
+      })
+      .join(""); // Join to prevent adding commas between elements
+  }
+
+  addHandlerRender(handler) {
+    this._parentElement.addEventListener("click", (e) => {
+      const recipeId = e.target.closest(".recipe--item").id;
+      handler(recipeId);
+    });
+  }
+
+  _goBackHandler() {
+    addEventListener("click", (e) => {
+      if (e.target === this._btnBack) {
+        this.toggleContainers("#main--container", "#results--container");
+      }
+    });
   }
 }
-
 export default new ResultsView();

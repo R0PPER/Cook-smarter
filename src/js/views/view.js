@@ -41,11 +41,6 @@ export default class View {
   renderError(message = this._errorMessage) {
     const markup = `
       <div class="error">
-        <div>
-          <svg>
-            <use href="${icons}#icon-alert-triangle"></use>
-          </svg>
-        </div>
         <p>${message}</p>
       </div>
     `;
@@ -66,5 +61,17 @@ export default class View {
     `;
     this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
+
+  toggleContainers(mainSelector, resultsSelector) {
+    const mainContainer = document.querySelector(mainSelector);
+    const resultsContainer = document.querySelector(resultsSelector);
+
+    if (!mainContainer || !resultsContainer) return;
+
+    const isResultsVisible = resultsContainer.style.display === "flex";
+
+    mainContainer.style.display = isResultsVisible ? "flex" : "none";
+    resultsContainer.style.display = isResultsVisible ? "none" : "flex";
   }
 }
