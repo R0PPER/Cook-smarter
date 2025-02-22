@@ -1,3 +1,17 @@
+:root {
+  /* Colors */
+  --primary-dark: #1a252c;
+  --secondary-dark: #36525b;
+  --accent-green: #6e7e57;
+  --accent-teal: #47695f;
+  --light-bg: #f0ebeb;
+  --light-text: #f0ebeb;
+  --medium-gray: #757575;
+  --scrollbar-thumb: #888;
+  --scrollbar-track: #f1f1f1;
+  --overlay: rgba(0, 0, 0, 0.3);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -25,7 +39,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--overlay);
   z-index: -1;
 }
 
@@ -50,7 +64,7 @@ body::before {
     rgb(113, 126, 88, 0.4)
   );
   border-radius: 2rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px var(--overlay);
   z-index: 1;
 }
 
@@ -89,7 +103,7 @@ body::before {
   justify-content: end;
   /* width: 100%;
   height: 100%; */
-  color: #1a252c;
+  color: var(--primary-dark);
   font-size: 1.3rem;
   /* border: 1px solid black; */
 }
@@ -107,18 +121,19 @@ body::before {
 
 #search--input {
   text-align: left;
-  color: #757575;
+  color: var(--medium-gray);
   font-size: large;
   width: 100%;
   height: 29%;
   padding: 0.5rem 0.7rem;
-  border: 0.2rem solid #6e7e57;
+  border: 0.2rem solid var(--accent-green);
   border-radius: 2rem;
   background-color: rgba(255, 255, 255, 0.8);
   outline: none; /* Removes the default focus outline */
 }
 
 #results--container {
+  position: relative;
   display: none;
   flex-direction: row;
   align-items: center;
@@ -145,9 +160,10 @@ body::before {
 }
 
 #recommended--recipes {
+  position: relative;
   width: 40%;
   margin-left: 3%;
-  background: #f0ebeb;
+  background: var(--light-bg);
   border-radius: 2rem;
   /* border: rgb(10, 255, 10) 2px solid; */
 }
@@ -157,6 +173,7 @@ body::before {
 
 .recipe--list {
   width: 99%;
+  height: 99%;
   margin-top: 3px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -164,7 +181,7 @@ body::before {
   padding-right: 3px;
   position: relative;
   direction: ltr; /* Keeps content left-to-right */
-  border: #f0ebeb 1rem solid;
+  border: var(--light-bg) 1rem solid;
   border-radius: 2rem;
 }
 .recipe--list {
@@ -179,27 +196,32 @@ ul {
   list-style-type: none;
 }
 
-/* Move scrollbar to the left side */
-.recipe--list::-webkit-scrollbar {
+/* Apply styles to all scrollbars */
+*::-webkit-scrollbar {
   width: 10px;
 }
 
-/* Adjust scrollbar track to align with the left */
-.recipe--list::-webkit-scrollbar-track {
-  background: #f1f1f1;
+/* Adjust scrollbar track */
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
   border-radius: 10px;
 }
 
-/* Move scrollbar thumb (draggable part) */
-.recipe--list::-webkit-scrollbar-thumb {
-  background: #888;
+/* Style the scrollbar thumb */
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
   border-radius: 10px;
+}
+
+/* Optional: Change scrollbar on hover */
+*::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .recipe--item {
   margin-bottom: 2%;
   width: 99%;
-  background-color: #47695f;
+  background-color: var(--accent-teal);
   border-radius: 0.3rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
@@ -235,10 +257,11 @@ ul {
 
 .recipe--title {
   display: flex;
+  padding: 1%;
   width: 75%;
   justify-content: center;
   font-size: 0.9rem;
-  color: #f0ebeb;
+  color: var(--light-text);
   /* border: #00000086 solid 2px; */
 }
 
@@ -247,11 +270,14 @@ ul {
 }
 
 #description--container {
+  position: relative;
   width: 50%;
   background: #f0ebeb;
   border-radius: 2rem;
   overflow-y: auto;
   /* border: #00000086 solid 2px; */
+  border: #f0ebeb 1rem solid;
+  border-radius: 2rem;
 }
 
 .description--title {
@@ -293,7 +319,7 @@ ul {
   grid-template-columns: repeat(2, 1fr); /* Creates 2 columns */
   gap: 30px; /* Space between items */
   width: 70%;
-  margin: 0 auto;
+  margin: 0 auto 1rem;
   /* border: #00000086 solid 2px; */
 }
 
@@ -323,4 +349,42 @@ ul {
 #btn--back:hover {
   background-color: rgb(71, 105, 95, 0.9);
   color: #f0ebeb;
+}
+
+/* Spinner Styles */
+.spinner {
+  position: absolute; /* Position the spinner absolutely within the parent */
+  top: 50%; /* Move the spinner down by 50% of the parent's height */
+  left: 50%; /* Move the spinner right by 50% of the parent's width */
+  transform: translate(-50%, -50%); /* Center the spinner precisely */
+  z-index: 10; /* Ensure the spinner is above other content */
+}
+
+.spinner-inner {
+  border: 4px solid #f3f3f3; /* Light gray border */
+  border-top: 4px solid #3498db; /* Blue border for animation */
+  border-radius: 50%; /* Make it circular */
+  width: 40px; /* Size of the spinner */
+  height: 40px; /* Size of the spinner */
+  animation: spin 1s linear infinite; /* Spin animation */
+}
+
+.error {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary-dark);
+  font-size: 1.5rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -8,6 +8,10 @@ import instructionsView from "./views/instructionsView.js";
 
 const controlSearch = async function (query) {
   try {
+    // Render spinner
+    resultsView.renderSpinner();
+
+    // Load search
     await model.loadSearch(query);
 
     // Render results
@@ -19,6 +23,10 @@ const controlSearch = async function (query) {
 
 const controlUsersPick = async function (id) {
   try {
+    // Render spinner
+    instructionsView.renderSpinner();
+
+    // Load recipe
     await model.loadRecipe(id);
 
     // Render Instructions

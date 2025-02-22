@@ -6,6 +6,7 @@ class ResultsView extends View {
   _btnBack = document.getElementById("btn--back");
 
   _generateMarkup() {
+    if (!this._data || this._data.length === 0) return this.renderError();
     return this._data
       .map((data) => {
         return `
@@ -30,6 +31,7 @@ class ResultsView extends View {
   _goBackHandler() {
     addEventListener("click", (e) => {
       if (e.target === this._btnBack) {
+        this._clear();
         this.toggleContainers("#main--container", "#results--container");
       }
     });
