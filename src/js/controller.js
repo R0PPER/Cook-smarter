@@ -17,7 +17,7 @@ const controlSearch = async function (query) {
     // Render results
     resultsView.render(model.state.recipe);
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
@@ -32,13 +32,13 @@ const controlUsersPick = async function (id) {
     // Render Instructions
     instructionsView.render(model.state.recipe);
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
 const init = function () {
   searchView.submitHandler(controlSearch);
-  resultsView._goBackHandler();
+  instructionsView._goBackHandler();
   resultsView.addHandlerRender(controlUsersPick);
 };
 

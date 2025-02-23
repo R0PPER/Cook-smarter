@@ -2,72 +2,6 @@ import { async } from "regenerator-runtime";
 import { API_URL, API_KEY } from "./config.js";
 import { getJSON } from "./helpers.js";
 
-// export const loadSearch = async function (query) {
-//   try {
-//     // Format query correctly (remove spaces around commas)
-//     const formattedQuery = query.replace(/\s*,\s*/g, ",").toLowerCase();
-
-//     // Full list of meats and seafood to exclude by default
-//     const allMeats = [
-//       "chicken",
-//       "beef",
-//       "fish",
-//       "seafood",
-//       "lamb",
-//       "turkey",
-//       "duck",
-//       "squid",
-//       "shrimp",
-//       "crab",
-//       "lobster",
-//       "salmon",
-//       "tuna",
-//       "pork",
-//       "veal",
-//       "goat",
-//       "rabbit",
-//     ];
-
-//     // Split user's query into an array of ingredients
-//     const userIngredients = formattedQuery.split(",");
-
-//     // Find meats included in the query
-//     const includedMeats = allMeats.filter((meat) =>
-//       userIngredients.includes(meat)
-//     );
-
-//     // Exclude all meats **except** the ones the user specified
-//     const excludedMeats = allMeats
-//       .filter((meat) => !includedMeats.includes(meat))
-//       .join(",");
-
-//     // Construct API request
-//     const searchData = await getJSON(
-//       ${API_URL}?${API_KEY}&includeIngredients=${formattedQuery}&excludeIngredients=${excludedMeats}&number=10
-//     );
-
-//     const id = searchData.results.map((result) => result.id);
-//     console.log(id);
-
-//     const recipeData = id.map(async (id) => {
-//       return await getJSON(
-//         https://api.spoonacular.com/recipes/${id}/information?${API_KEY}&includeNutrition=false
-//       );
-//     });
-
-//     console.log(recipeData);
-
-//     console.log(searchData);
-
-//     if (!searchData.results.length) throw new Error("No recipes found!");
-
-//     state.recipe = searchData.results; // Update state with correct data
-//     console.log(state.recipe);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
 export const state = {
   recipe: [],
 };
@@ -118,12 +52,15 @@ const fetchRecipeDetails = async (id) => {
   );
 };
 
-// Validate if at least one user ingredient is in the recipe
+// Validate if at least one user ingredient is found in the recipe (partial match)
 const validateRecipe = (recipe, userIngredients) => {
   const recipeIngredients = recipe.extendedIngredients.map((ing) =>
     ing.name.toLowerCase()
   );
-  return userIngredients.some((ing) => recipeIngredients.includes(ing));
+
+  return userIngredients.some((userIng) =>
+    recipeIngredients.some((recipeIng) => recipeIng.includes(userIng))
+  );
 };
 
 // Load search results and validate them
@@ -134,6 +71,7 @@ export const loadSearch = async function (query) {
     const excludedMeats = getExcludedMeats(userIngredients);
 
     const searchData = await fetchSearchResults(formattedQuery, excludedMeats);
+
     if (!searchData.results.length) throw new Error("No recipes found!");
 
     const validatedRecipes = await Promise.all(

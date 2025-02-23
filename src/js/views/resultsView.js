@@ -12,7 +12,9 @@ class ResultsView extends View {
         return `
           <li class="recipe--item" id="${data.id}">
             <div class="recipe--imgContainer">
-              <img src="${data.image}" alt="${data.title}" class="recipe--img" />
+              <img src="${data.image || this._handleImageError}" alt="${
+          data.title
+        }" class="recipe--img" />
               <h1 class="recipe--title">${data.title}</h1>
             </div>
           </li>
@@ -28,13 +30,9 @@ class ResultsView extends View {
     });
   }
 
-  _goBackHandler() {
-    addEventListener("click", (e) => {
-      if (e.target === this._btnBack) {
-        this._clear();
-        this.toggleContainers("#main--container", "#results--container");
-      }
-    });
+  _handleImageError(e) {
+    e.onerror = null;
+    e.alt = "No Image Found"; // Change the alt text
   }
 }
 export default new ResultsView();

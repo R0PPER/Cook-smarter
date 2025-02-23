@@ -43,10 +43,6 @@ body::before {
   z-index: -1;
 }
 
-.hidden {
-  display: none;
-}
-
 #main--container {
   /* display: none; */
 
@@ -272,6 +268,7 @@ ul {
 #description--container {
   position: relative;
   width: 50%;
+  color: var(--secondary-dark);
   background: #f0ebeb;
   border-radius: 2rem;
   overflow-y: auto;

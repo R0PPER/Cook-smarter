@@ -14,7 +14,7 @@ class InstructionsView extends View {
       <ul class="description--list">
         ${this._data.ingredients
           .map((ing) => `<li>${ing.amount} ${ing.metric} ${ing.name}</li>`)
-          .join("")}
+          .join("")} 
       </ul>
     `;
   }

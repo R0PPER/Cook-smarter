@@ -8,6 +8,7 @@
 
 export default class View {
   _data;
+  _btnBack = document.getElementById("btn--back");
 
   render(data) {
     if (!data || data.length === 0) return this.renderError();
@@ -71,5 +72,14 @@ export default class View {
 
     mainContainer.style.display = isResultsVisible ? "flex" : "none";
     resultsContainer.style.display = isResultsVisible ? "none" : "flex";
+  }
+
+  _goBackHandler() {
+    addEventListener("click", (e) => {
+      if (e.target === this._btnBack) {
+        this._clear();
+        this.toggleContainers("#main--container", "#results--container");
+      }
+    });
   }
 }
